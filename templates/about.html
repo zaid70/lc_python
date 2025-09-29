@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Ladies Collections | 20+ Years of Premium Jewelry Excellence{% endblock %}
+
+{% block content %}
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="breadcrumb-content">
+      <a href="{{ url_for('index') }}">Home</a>
+      <span>></span>
+      <span>About Us</span>
+    </div>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1>About Ladies Collections</h1>
+  </section>
+
+  <!-- About Content -->
+  <section class="content-section">
+    <h2>Our Story</h2>
+    <p>
+      For over <strong>two decades</strong>, Ladies Collections (LC Shop) has been synonymous with elegance, quality, and trust in Bangalore's jewelry landscape. Founded in <strong>2007</strong> by <strong>Sabiha Rahman</strong>, our store is established in the heart of <strong>Koramangala</strong>, with a simple vision: to make exquisite jewelry accessible to every woman who values beauty and craftsmanship.
+    </p>
+    <p>
+      What started as a small family business has grown into one of Bangalore's most trusted names in premium jewelry, serving over <strong>50,000 satisfied customers</strong> across South India. Under <strong>Sabiha Rahman's</strong> personal leadership, she addresses every customer individually, ensuring that each person receives personalized attention and guidance in finding the perfect piece. This commitment to individual customer care, along with quality and authentic designs, has been the cornerstone of our success.
+    </p>
+
+    <h3>Our Expertise</h3>
+    <p>
+      With <strong>20+ years of expertise</strong> in the jewelry industry, we specialize in:
+    </p>
+    <ul>
+      <li><strong>One-Gram Gold Jewelry</strong> - Affordable luxury that doesn't compromise on beauty</li>
+      <li><strong>Antique Collections</strong> - Traditional designs that celebrate India's rich heritage</li>
+      <li><strong>Sterling Silver (92.5)</strong> - Premium silver jewelry for contemporary styles</li>
+      <li><strong>Bridal Collections</strong> - Exclusive pieces for your most special moments</li>
+      <li><strong>Temple Jewelry</strong> - Sacred designs inspired by South Indian traditions</li>
+      <li><strong>Contemporary Jewelry</strong> - Modern pieces for today's confident woman</li>
+    </ul>
+
+    <h3>Quality Promise</h3>
+    <p>
+      Every piece in our collection undergoes rigorous quality checks to ensure exceptional craftsmanship. We source our materials from trusted suppliers and work with skilled artisans who share our passion for perfection. Our commitment to quality means:
+    </p>
+    <ul>
+      <li>Authentic materials and genuine craftsmanship</li>
+      <li>Detailed quality inspection of every piece</li>
+      <li>Proper hallmarking and certification where applicable</li>
+      <li>15-day return policy for complete peace of mind</li>
+      <li>Lifetime maintenance and care guidance</li>
+    </ul>
+
+    <h3>Our Values</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+      <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px;">
+        <h4 style="color: #a10649; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">🏆 Excellence</h4>
+        <p style="margin: 0;">We strive for perfection in every design, ensuring each piece meets our high standards of quality and beauty.</p>
+      </div>
+      <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px;">
+        <h4 style="color: #a10649; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">🤝 Trust</h4>
+        <p style="margin: 0;">Building lasting relationships with our customers through transparency, honesty, and reliable service.</p>
+      </div>
+      <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px;">
+        <h4 style="color: #a10649; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">🎨 Tradition</h4>
+        <p style="margin: 0;">Celebrating India's rich jewelry heritage while embracing contemporary design sensibilities.</p>
+      </div>
+    </div>
+
+    <h3>Why Choose Ladies Collections?</h3>
+    <p>
+      Over the years, thousands of customers have trusted us with their most precious jewelry needs. Here's what sets us apart:
+    </p>
+    <ul>
+      <li><strong>20+ Years of Experience</strong> - Deep understanding of jewelry craftsmanship and customer preferences</li>
+      <li><strong>Curated Collections</strong> - Hand-selected pieces that combine traditional beauty with modern appeal</li>
+      <li><strong>Competitive Pricing</strong> - Premium quality jewelry at accessible prices</li>
+      <li><strong>Personal Service by Sabiha Rahman</strong> - Owner personally addresses every customer to help you find the perfect piece</li>
+      <li><strong>Convenient Location</strong> - Easy to reach in the heart of Koramangala, Bangalore</li>
+      <li><strong>After-Sales Support</strong> - Comprehensive care and maintenance guidance</li>
+    </ul>
+
+    <h3>Our Commitment to You</h3>
+    <p>
+      At Ladies Collections, we believe that jewelry is more than just an accessory – it's an expression of your personality, a celebration of life's special moments, and a treasure to be cherished for generations. <strong>Sabiha Rahman</strong> personally ensures that every customer receives individual attention, taking the time to understand your unique preferences and helping you find pieces that perfectly resonate with your style and story.
+    </p>
+    <p>
+      Whether you're looking for everyday elegance, bridal grandeur, or a special gift for someone you love, <strong>Sabiha Rahman</strong> is here to personally guide you through our collection and make your jewelry dreams come true. Visit our showroom in Koramangala and experience the personal touch that only comes from speaking directly with the owner who truly cares about each customer.
+    </p>
+
+    <div style="text-align: center; margin: 3rem 0;">
+      <h3 style="color: #a10649; font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Visit Our Store Today</h3>
+      <p style="font-size: 1.2rem; margin-bottom: 2rem;">Experience our exquisite collection in person</p>
+      <a href="{{ url_for('contact') }}" class="btn">Get Directions</a>
+      <a href="{{ url_for('collections') }}" class="btn btn-secondary" style="margin-left: 1rem;">View Collections</a>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section class="trust">
+    <div class="trust-container">
+      <div class="trust-item">
+        <h3>50,000+</h3>
+        <p>Happy Customers</p>
+      </div>
+      <div class="trust-item">
+        <h3>20+ Years</h3>
+        <p>Legacy of Excellence</p>
+      </div>
+      <div class="trust-item">
+        <h3>Premium Quality</h3>
+        <p>Handpicked Collection</p>
+      </div>
+      <div class="trust-item">
+        <h3>1000+</h3>
+        <p>Unique Designs</p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

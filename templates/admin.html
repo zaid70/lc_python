@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - Contact Submissions | Ladies Collections{% endblock %}
+
+{% block content %}
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1>Admin Panel</h1>
+    <p>Contact Form Submissions Dashboard</p>
+    <div style="background: #d4edda; color: #155724; padding: 1rem; margin-top: 1rem; border-radius: 8px; border: 1px solid #c3e6cb;">
+      <i class="fas fa-check-circle"></i> Successfully authenticated as: <strong>{{ session.username }}</strong>
+      | <a href="{{ url_for('logout') }}" style="color: #dc3545;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+  </section>
+
+  <!-- Admin Dashboard -->
+  <section class="content-section">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+      <div style="background: #a10649; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
+        <h3 style="color: white; margin-bottom: 0.5rem;">{{ total_submissions }}</h3>
+        <p style="margin: 0;">Total Submissions</p>
+      </div>
+      <div style="background: #e74c3c; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
+        <h3 style="color: white; margin-bottom: 0.5rem;">{{ unread_count }}</h3>
+        <p style="margin: 0;">Unread Messages</p>
+      </div>
+      <div style="background: #27ae60; color: white; padding: 2rem; border-radius: 10px; text-align: center;">
+        <h3 style="color: white; margin-bottom: 0.5rem;">{{ total_submissions - unread_count }}</h3>
+        <p style="margin: 0;">Read Messages</p>
+      </div>
+    </div>
+
+    <h2>Recent Contact Submissions</h2>
+    
+    {% if submissions %}
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <thead style="background: #f8f9fa;">
+            <tr>
+              <th style="padding: 1rem; text-align: left; border-bottom: 1px solid #dee2e6;">Status</th>
+              <th style="padding: 1rem; text-align: left; border-bottom: 1px solid #dee2e6;">Date</th>
+              <th style="padding: 1rem; text-align: left; border-bottom: 1px solid #dee2e6;">Name</th>
+              <th style="padding: 1rem; text-align: left; border-bottom: 1px solid #dee2e6;">Email</th>
+              <th style="padding: 1rem; text-align: left; border-bottom: 1px solid #dee2e6;">Subject</th>
+              <th style="padding: 1rem; text-align: left; border-bottom: 1px solid #dee2e6;">Message</th>
+              <th style="padding: 1rem; text-align: left; border-bottom: 1px solid #dee2e6;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for submission in submissions %}
+              <tr style="border-bottom: 1px solid #f1f3f4; {% if not submission.is_read %}background: #fff3cd;{% endif %}">
+                <td style="padding: 1rem;">
+                  {% if submission.is_read %}
+                    <span style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 15px; font-size: 0.8rem;">Read</span>
+                  {% else %}
+                    <span style="background: #dc3545; color: white; padding: 0.25rem 0.5rem; border-radius: 15px; font-size: 0.8rem;">New</span>
+                  {% endif %}
+                </td>
+                <td style="padding: 1rem;">
+                  <div style="font-weight: 600;">{{ submission.submitted_at.strftime('%d %b %Y') }}</div>
+                  <div style="font-size: 0.9rem; color: #666;">{{ submission.submitted_at.strftime('%H:%M') }}</div>
+                </td>
+                <td style="padding: 1rem; font-weight: 600;">{{ submission.name }}</td>
+                <td style="padding: 1rem;">
+                  <a href="mailto:{{ submission.email }}" style="color: #a10649; text-decoration: none;">{{ submission.email }}</a>
+                  {% if submission.phone %}
+                    <br><a href="tel:{{ submission.phone }}" style="color: #a10649; text-decoration: none; font-size: 0.9rem;">{{ submission.phone }}</a>
+                  {% endif %}
+                </td>
+                <td style="padding: 1rem; font-weight: 600;">{{ submission.subject }}</td>
+                <td style="padding: 1rem; max-width: 300px;">
+                  <div style="max-height: 60px; overflow: hidden; text-overflow: ellipsis;">
+                    {{ submission.message[:100] }}{% if submission.message|length > 100 %}...{% endif %}
+                  </div>
+                </td>
+                <td style="padding: 1rem;">
+                  <a href="{{ url_for('view_submission', submission_id=submission.id) }}" 
+                     style="background: #a10649; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 5px; font-size: 0.9rem; margin-bottom: 0.5rem; display: inline-block;">
+                    View Full
+                  </a>
+                  {% if not submission.is_read %}
+                    <a href="{{ url_for('mark_read', submission_id=submission.id) }}" 
+                       style="background: #28a745; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 5px; font-size: 0.9rem; display: inline-block;">
+                      Mark Read
+                    </a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div style="text-align: center; padding: 3rem; background: #f8f9fa; border-radius: 10px;">
+        <div style="font-size: 3rem; margin-bottom: 1rem; color: #6c757d;">📫</div>
+        <h3 style="margin-bottom: 1rem; color: #6c757d;">No Contact Submissions Yet</h3>
+        <p style="color: #6c757d;">Customer messages will appear here when they submit the contact form.</p>
+      </div>
+    {% endif %}
+
+    <div style="margin-top: 3rem; padding: 2rem; background: #f8f6f6; border-radius: 10px;">
+      <h3 style="color: #a10649; margin-bottom: 1rem;">👋 Hello Sabiha Rahman!</h3>
+      <p style="margin-bottom: 1rem;">
+        This admin panel shows all customer inquiries submitted through your website's contact form. 
+        Each message is automatically saved to your database and you can:
+      </p>
+      <ul style="margin-bottom: 1rem;">
+        <li>View full message details by clicking "View Full"</li>
+        <li>Click on email addresses to reply directly</li>
+        <li>Click on phone numbers to call customers</li>
+        <li>Mark messages as read to keep track of follow-ups</li>
+      </ul>
+      <p><strong>Quick Actions:</strong></p>
+      <div style="margin-top: 1rem;">
+        <a href="{{ url_for('contact') }}" class="btn btn-outline">View Contact Form</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary" style="margin-left: 1rem;">Back to Website</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+@media (max-width: 768px) {
+  table {
+    font-size: 0.9rem;
+  }
+  
+  th, td {
+    padding: 0.5rem !important;
+  }
+}
+</style>
+{% endblock %}

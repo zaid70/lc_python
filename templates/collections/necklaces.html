@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Necklaces Collection - Ladies Collections | Premium Gold & Silver Necklaces{% endblock %}
+
+{% block content %}
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="breadcrumb-content">
+      <a href="{{ url_for('index') }}">Home</a>
+      <span>></span>
+      <a href="{{ url_for('collections') }}">Collections</a>
+      <span>></span>
+      <span>Necklaces</span>
+    </div>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1>Necklaces Collection</h1>
+    <p>Elegant statement pieces for every occasion</p>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content-section">
+    <h2>Premium Necklace Designs</h2>
+    <p>
+      Our necklaces collection features exquisite pieces ranging from traditional temple jewelry to contemporary designs. Each necklace is crafted with precision and attention to detail, ensuring you find the perfect piece to complement your style.
+    </p>
+
+    <h3>Available Styles:</h3>
+    <ul>
+      <li><strong>Temple Necklaces</strong> - Traditional South Indian designs with intricate deity motifs</li>
+      <li><strong>One-Gram Gold Necklaces</strong> - Affordable luxury with the look of pure gold</li>
+      <li><strong>Sterling Silver Necklaces</strong> - Contemporary 92.5 silver pieces</li>
+      <li><strong>Antique Necklaces</strong> - Vintage-inspired designs with timeless appeal</li>
+      <li><strong>Bridal Necklaces</strong> - Elaborate pieces perfect for weddings and special occasions</li>
+      <li><strong>Contemporary Necklaces</strong> - Modern designs for everyday elegance</li>
+    </ul>
+
+    <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+      <h3 style="color: #a10649; margin-bottom: 1rem;">Personal Consultation with Sabiha Rahman</h3>
+      <p style="margin-bottom: 1rem;">
+        Get personalized recommendations from our founder and owner. Sabiha Rahman will help you choose the perfect necklace that matches your style, occasion, and budget.
+      </p>
+      <a href="{{ url_for('contact') }}" class="btn">Schedule a Consultation</a>
+    </div>
+
+    <h3>Care Instructions:</h3>
+    <p>
+      To maintain the beauty and longevity of your necklace:
+    </p>
+    <ul>
+      <li>Store in a dry place, preferably in individual pouches</li>
+      <li>Clean gently with a soft cloth after each use</li>
+      <li>Avoid exposure to perfumes, lotions, and harsh chemicals</li>
+      <li>For professional cleaning and maintenance, visit our store</li>
+    </ul>
+
+    <div style="text-align: center; margin: 3rem 0;">
+      <h3 style="margin-bottom: 1rem;">Visit Our Store to See the Collection</h3>
+      <p style="margin-bottom: 2rem;">Experience our necklaces in person and get expert guidance</p>
+      <a href="{{ url_for('contact') }}" class="btn">Get Directions</a>
+      <a href="tel:+919448851731" class="btn btn-secondary" style="margin-left: 1rem;">Call Us</a>
+    </div>
+  </section>
+{% endblock %}

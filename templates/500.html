@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error - Ladies Collections{% endblock %}
+
+{% block content %}
+  <section class="content-section centered" style="text-align: center; padding: 4rem 2rem;">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <div style="font-size: 6rem; color: #a10649; margin-bottom: 2rem;">500</div>
+      
+      <h1 style="font-size: 2.5rem; margin-bottom: 1rem; color: #333;">Internal Server Error</h1>
+      
+      <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #666;">
+        Something went wrong on our end. We're working to fix this issue. Please try again in a few moments.
+      </p>
+      
+      <div style="margin: 2rem 0;">
+        <a href="{{ url_for('index') }}" class="btn" style="margin-right: 1rem;">Go Home</a>
+        <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+      </div>
+      
+      <hr style="margin: 3rem 0; border: none; border-top: 1px solid #eee;">
+      
+      <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px;">
+        <h3 style="color: #a10649; margin-bottom: 1rem;">Need Immediate Assistance?</h3>
+        <p style="margin-bottom: 1rem;">
+          If this issue persists, please contact us directly and we'll help you right away.
+        </p>
+        <div style="margin-top: 1.5rem;">
+          <a href="tel:+919448851731" class="btn">Call: +91 9448851731</a>
+          <a href="mailto:info@lcshop.in" class="btn btn-outline" style="margin-left: 1rem;">Email Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

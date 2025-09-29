@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login - Ladies Collections{% endblock %}
+
+{% block content %}
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1>Admin Login</h1>
+    <p>Secure access for Sabiha Rahman</p>
+  </section>
+
+  <!-- Login Form -->
+  <section class="content-section">
+    <div style="max-width: 400px; margin: 0 auto;">
+      <div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        
+        <!-- Welcome Message -->
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="width: 80px; height: 80px; background: #a10649; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+            <i class="fas fa-user-shield" style="color: white; font-size: 2rem;"></i>
+          </div>
+          <h2 style="color: #a10649; margin-bottom: 0.5rem;">Admin Login Required</h2>
+          <p style="color: #666; margin: 0;">🔒 You must login to access the admin panel</p>
+        </div>
+
+        <!-- Login Form -->
+        <form method="POST" style="margin-bottom: 2rem;">
+          <div style="margin-bottom: 1.5rem;">
+            <label for="username" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">
+              <i class="fas fa-user" style="color: #a10649; margin-right: 0.5rem;"></i>Username
+            </label>
+            <input type="text" id="username" name="username" required 
+                   style="width: 100%; padding: 0.75rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s;"
+                   placeholder="Enter your username"
+                   onfocus="this.style.borderColor='#a10649'"
+                   onblur="this.style.borderColor='#ddd'">
+          </div>
+          
+          <div style="margin-bottom: 2rem;">
+            <label for="password" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333;">
+              <i class="fas fa-lock" style="color: #a10649; margin-right: 0.5rem;"></i>Password
+            </label>
+            <input type="password" id="password" name="password" required 
+                   style="width: 100%; padding: 0.75rem; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s;"
+                   placeholder="Enter your password"
+                   onfocus="this.style.borderColor='#a10649'"
+                   onblur="this.style.borderColor='#ddd'">
+          </div>
+          
+          <button type="submit" 
+                  style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #a10649, #c71858); color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s;"
+                  onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 5px 15px rgba(161,6,73,0.3)'"
+                  onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Login to Dashboard
+          </button>
+        </form>
+
+        <!-- Back to Website -->
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="{{ url_for('index') }}" style="color: #a10649; text-decoration: none; font-size: 0.9rem;">
+            <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>Back to Website
+          </a>
+        </div>
+      </div>
+
+      <!-- Security Notice -->
+      <div style="background: #fff3cd; padding: 1.5rem; border-radius: 10px; margin-top: 2rem; border-left: 4px solid #ffc107;">
+        <h4 style="color: #856404; margin-bottom: 1rem;">
+          <i class="fas fa-shield-alt" style="margin-right: 0.5rem;"></i>Security Notice
+        </h4>
+        <ul style="margin: 0; color: #856404; font-size: 0.9rem;">
+          <li>This admin panel is for authorized personnel only</li>
+          <li>All access attempts are logged for security</li>
+          <li>Customer data is protected and confidential</li>
+          <li>Please logout when finished</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Custom login form styling */
+.content-section {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .content-section > div {
+    max-width: 100% !important;
+    padding: 1rem !important;
+  }
+  
+  .content-section > div > div {
+    padding: 2rem 1.5rem !important;
+  }
+}
+</style>
+{% endblock %}

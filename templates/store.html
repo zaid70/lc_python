@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Our Store - Ladies Collections | Visit Our Koramangala Showroom{% endblock %}
+
+{% block content %}
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="breadcrumb-content">
+      <a href="{{ url_for('index') }}">Home</a>
+      <span>></span>
+      <span>Store</span>
+    </div>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1>Visit Our Store</h1>
+    <p>Experience our exquisite jewelry collection in person</p>
+  </section>
+
+  <!-- Store Content -->
+  <section class="content-section">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
+      
+      <!-- Store Information -->
+      <div>
+        <h2>Ladies Collections Showroom</h2>
+        <p>
+          Located in the heart of Koramangala, Bangalore, our showroom has been serving customers for over two decades. Founded by <strong>Sabiha Rahman</strong> in 2007, our store offers a personal shopping experience where every customer receives individual attention.
+        </p>
+        
+        <h3 style="margin-top: 2rem;">What to Expect:</h3>
+        <ul>
+          <li><strong>Personal Consultation</strong> - Sabiha Rahman personally assists every customer</li>
+          <li><strong>Extensive Collection</strong> - Over 1000+ unique jewelry designs</li>
+          <li><strong>Quality Assurance</strong> - Each piece undergoes rigorous quality checks</li>
+          <li><strong>Expert Guidance</strong> - 20+ years of jewelry expertise</li>
+          <li><strong>Comfortable Environment</strong> - Relaxed, pressure-free shopping experience</li>
+        </ul>
+
+        <div style="background: #f8f6f6; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+          <h4 style="color: #a10649; margin-bottom: 1rem;">🎯 Our Specialties</h4>
+          <ul style="margin: 0;">
+            <li>One-Gram Gold Jewelry</li>
+            <li>Antique & Temple Jewelry</li>
+            <li>Sterling Silver (92.5)</li>
+            <li>Bridal Collections</li>
+            <li>Contemporary Designs</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Store Details -->
+      <div>
+        <h2>Store Information</h2>
+        
+        <div class="contact-card">
+          <div class="contact-item" style="margin-bottom: 2rem; display: flex; align-items: flex-start; gap: 1rem;">
+            <i class="fas fa-map-marker-alt" style="color: #a10649; font-size: 1.2rem; margin-top: 0.2rem;"></i>
+            <div>
+              <strong>Address</strong><br>
+              #11, 60ft Road, 6th Block, Koramangala,<br>
+              Bangalore - 560095, Karnataka
+            </div>
+          </div>
+          
+          <div class="contact-item" style="margin-bottom: 2rem; display: flex; align-items: flex-start; gap: 1rem;">
+            <i class="fas fa-clock" style="color: #a10649; font-size: 1.2rem; margin-top: 0.2rem;"></i>
+            <div>
+              <strong>Store Hours</strong><br>
+              Monday - Saturday: 10:30 AM - 8:00 PM<br>
+              Sunday: Closed
+            </div>
+          </div>
+          
+          <div class="contact-item" style="margin-bottom: 2rem; display: flex; align-items: flex-start; gap: 1rem;">
+            <i class="fas fa-phone" style="color: #a10649; font-size: 1.2rem; margin-top: 0.2rem;"></i>
+            <div>
+              <strong>Phone</strong><br>
+              <a href="tel:+919448851731">+91 9448851731</a>
+            </div>
+          </div>
+          
+          <div class="contact-item" style="margin-bottom: 2rem; display: flex; align-items: flex-start; gap: 1rem;">
+            <i class="fab fa-whatsapp" style="color: #a10649; font-size: 1.2rem; margin-top: 0.2rem;"></i>
+            <div>
+              <strong>WhatsApp</strong><br>
+              <a href="https://wa.me/919448851731">Chat with us</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <a href="https://maps.google.com/?q=Ladies+Collections+Koramangala" target="_blank" class="btn" style="width: 100%; text-align: center;">
+            📍 Get Directions
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <h2>Our Services</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 2rem 0;">
+      <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">💍</div>
+        <h3>Custom Jewelry</h3>
+        <p>Personalized designs crafted to your specifications and preferences</p>
+      </div>
+      <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔧</div>
+        <h3>Repair Services</h3>
+        <p>Professional jewelry repair and maintenance services</p>
+      </div>
+      <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎁</div>
+        <h3>Gift Wrapping</h3>
+        <p>Elegant gift wrapping for special occasions and celebrations</p>
+      </div>
+      <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">💎</div>
+        <h3>Consultation</h3>
+        <p>Expert guidance on jewelry selection and care</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin: 3rem 0;">
+      <h3 style="margin-bottom: 1rem;">Ready to Visit?</h3>
+      <p style="margin-bottom: 2rem; font-size: 1.1rem;">
+        Come experience the personal touch that only comes from shopping with Sabiha Rahman herself
+      </p>
+      <a href="{{ url_for('contact') }}" class="btn">Contact Us</a>
+      <a href="{{ url_for('collections') }}" class="btn btn-secondary" style="margin-left: 1rem;">View Collections</a>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section class="trust">
+    <div class="trust-container">
+      <div class="trust-item">
+        <h3>50,000+</h3>
+        <p>Happy Customers</p>
+      </div>
+      <div class="trust-item">
+        <h3>20+ Years</h3>
+        <p>Legacy of Excellence</p>
+      </div>
+      <div class="trust-item">
+        <h3>Premium Quality</h3>
+        <p>Handpicked Collection</p>
+      </div>
+      <div class="trust-item">
+        <h3>1000+</h3>
+        <p>Unique Designs</p>
+      </div>
+    </div>
+  </section>
+{% endblock %}
