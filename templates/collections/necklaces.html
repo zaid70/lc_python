@@ -27,15 +27,31 @@
       Our necklaces collection features exquisite pieces ranging from traditional temple jewelry to contemporary designs. Each necklace is crafted with precision and attention to detail, ensuring you find the perfect piece to complement your style.
     </p>
 
-    <h3>Available Styles:</h3>
-    <ul>
-      <li><strong>Temple Necklaces</strong> - Traditional South Indian designs with intricate deity motifs</li>
-      <li><strong>One-Gram Gold Necklaces</strong> - Affordable luxury with the look of pure gold</li>
-      <li><strong>Sterling Silver Necklaces</strong> - Contemporary 92.5 silver pieces</li>
-      <li><strong>Antique Necklaces</strong> - Vintage-inspired designs with timeless appeal</li>
-      <li><strong>Bridal Necklaces</strong> - Elaborate pieces perfect for weddings and special occasions</li>
-      <li><strong>Contemporary Necklaces</strong> - Modern designs for everyday elegance</li>
-    </ul>
+    <!-- Product Grid -->
+    <div class="product-grid">
+      {% for item in items %}
+        <div class="product-card">
+          <div class="product-image-container">
+            <img 
+              src="{% if item.image_url %}{{ item.image_url }}{% else %}/static/images/no-image.jpg{% endif %}" 
+              alt="{{ item.name }}" 
+              class="product-image" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='/static/images/no-image.jpg';"
+              onload="this.style.opacity='1'">
+            <div class="image-loading">Loading...</div>
+          </div>
+          <div class="product-info">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description }}</p>
+            <div class="product-price">₹{{ "{:,.2f}".format(item.price) }}</div>
+            <a href="{{ url_for('contact') }}" class="btn">Enquire Now</a>
+          </div>
+        </div>
+      {% else %}
+        <p class="no-items">No items available in this collection yet. Check back soon!</p>
+      {% endfor %}
+    </div>
 
     <div style="background: #f8f6f6; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
       <h3 style="color: #a10649; margin-bottom: 1rem;">Personal Consultation with Sabiha Rahman</h3>

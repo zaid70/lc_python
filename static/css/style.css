@@ -48,6 +48,134 @@ header {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
   font-weight: 700;
+}
+
+/* Product Grid Styles */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.product-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(161,6,73,0.15);
+  border-color: #a10649;
+}
+
+.product-image-container {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  background: #f9f9f9;
+  z-index: 1;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block;
+  position: relative;
+  z-index: 2;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.product-image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(161,6,73,0.05);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.image-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #666;
+  font-size: 14px;
+  z-index: 1;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-image.loaded {
+  opacity: 1;
+}
+}
+
+.product-info h3 {
+  color: #a10649;
+  margin-bottom: 0.8rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+
+.product-info p {
+  color: #666;
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 1.2rem;
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  display: inline-block;
+}
+
+.product-price::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #a10649;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-price::after {
+  transform: scaleX(1);
+}
+
+.no-items {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: #666;
   color: #a10649;
   text-decoration: none;
 }

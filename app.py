@@ -4,7 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
+from twilio.twiml.messaging_response import MessagingResponse
+from twilio.rest import Client
 import os
+import requests
+import uuid
+from urllib.parse import urlparse
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-change-this-in-production'
@@ -20,9 +25,118 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'your-email@gmail.com'  # Replace with your email
 app.config['MAIL_PASSWORD'] = 'your-app-password'     # Replace with your app password
 
+# Twilio WhatsApp configuration
+app.config['TWILIO_ACCOUNT_SID'] = 'AC44177f3c51acb9140ca9a5abb35a22b9'
+app.config['TWILIO_AUTH_TOKEN'] = '61b4637797a78d20ad31d98119e1b3bf'
+app.config['TWILIO_PHONE_NUMBER'] = 'whatsapp:+14155238886'  # Twilio's default WhatsApp sandbox number
+app.config['TWILIO_WEBHOOK_URL'] = 'https://timberwolf-mastiff-9776.twil.io/demo-reply'  # Your Twilio Function URL
+
 # Initialize extensions
 db = SQLAlchemy(app)
 mail = Mail(app)
+
+# Models
+class JewelryItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text)
+    price = db.Column(db.Float)
+    image_url = db.Column(db.String(500))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    whatsapp_upload_id = db.Column(db.String(100))  # To track WhatsApp message ID
+
+@app.route('/whatsapp-webhook', methods=['POST'])
+def handle_whatsapp():
+    """Handle incoming WhatsApp messages"""
+    # Create TwiML response
+    resp = MessagingResponse()
+    
+    # Get message data
+    message = request.form.get('Body')
+    media_url = request.form.get('MediaUrl0')
+    num_media = int(request.form.get('NumMedia', 0))
+    from_number = request.form.get('From')
+    message_sid = request.form.get('MessageSid')
+    
+    # Debug print
+    print(f"Received message: {message}")
+    print(f"Media URL: {media_url}")
+    print(f"Number of media: {num_media}")
+    print(f"Form data: {request.form}")
+    
+    # Only allow specific WhatsApp numbers (admins)
+    allowed_numbers = ['whatsapp:+917892750820']  # Your WhatsApp number
+    if from_number not in allowed_numbers:
+        resp.message('❌ Unauthorized number')
+        return str(resp)
+        
+    try:
+        # Parse message format: 
+        # Category | Name | Price | Description
+        if '|' in message:
+            parts = message.split('|')
+            category = parts[0].strip()
+            name = parts[1].strip()
+            price = float(parts[2].strip())
+            description = parts[3].strip() if len(parts) > 3 else ''
+            
+            # Handle image URL
+            final_image_url = None
+            if num_media > 0 and media_url:
+                try:
+                    # Download image using Twilio credentials
+                    response = requests.get(
+                        media_url,
+                        auth=(app.config['TWILIO_ACCOUNT_SID'], app.config['TWILIO_AUTH_TOKEN'])
+                    )
+                    
+                    if response.status_code == 200:
+                        # Generate unique filename
+                        file_extension = '.jpg'  # Default to jpg for WhatsApp images
+                        filename = f"{uuid.uuid4()}{file_extension}"
+                        file_path = os.path.join('static', 'uploads', filename)
+                        
+                        # Save the file
+                        with open(os.path.join(app.root_path, file_path), 'wb') as f:
+                            f.write(response.content)
+                        
+                        # Set the URL to the local path
+                        final_image_url = '/' + file_path.replace('\\', '/')
+                        print(f"Image saved locally: {final_image_url}")
+                    else:
+                        print(f"Failed to download image: {response.status_code}")
+                except Exception as e:
+                    print(f"Error handling image: {str(e)}")
+            
+            # Create new jewelry item
+            item = JewelryItem(
+                category=category,
+                name=name,
+                price=price,
+                description=description,
+                image_url=final_image_url,
+                whatsapp_upload_id=message_sid
+            )
+            
+            db.session.add(item)
+            db.session.commit()
+            
+            # Send confirmation via TwiML
+            confirm_message = f'✅ Added new {category}: {name}\nPrice: ₹{price:,.2f}'
+            if final_image_url:
+                confirm_message += '\nImage: ✓ Successfully uploaded'
+            else:
+                confirm_message += '\nImage: ❌ No image received'
+            resp.message(confirm_message)
+            return str(resp)
+        else:
+            raise ValueError("Message format incorrect")
+            
+    except Exception as e:
+        # Send error message via TwiML
+        resp.message(f'❌ Error: {str(e)}\n\nCorrect format:\nCategory | Name | Price | Description\n\nExample:\nNecklaces | Gold Temple Necklace | 2499 | Beautiful traditional necklace')
+        return str(resp)
 
 # Authentication helper functions
 def login_required(f):
@@ -96,12 +210,6 @@ def collections():
     """Collections page"""
     return render_template('collections.html')
 
-@app.route('/collections/<category>')
-def collections_category(category):
-    """Specific collection category pages"""
-    # You can add logic here to filter products by category
-    return render_template(f'collections/{category}.html')
-
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     """Contact page with form handling"""
@@ -169,6 +277,26 @@ You can view all submissions in the admin panel: http://localhost:5000/admin
 def store():
     """Store page"""
     return render_template('store.html')
+
+@app.route('/collections/<category>')
+def collections_category(category):
+    """Display items for a specific category"""
+    categories = {
+        'necklaces': 'Necklaces',
+        'earrings': 'Earrings',
+        'bangles': 'Bangles'
+    }
+    
+    if category not in categories:
+        return render_template('404.html'), 404
+        
+    # Get items for this category
+    items = JewelryItem.query.filter_by(category=categories[category])\
+        .order_by(JewelryItem.created_at.desc()).all()
+        
+    return render_template(f'collections/{category}.html', 
+                         items=items, 
+                         category=categories[category])
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
