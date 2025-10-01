@@ -26,7 +26,7 @@ app.config['MAIL_USERNAME'] = 'your-email@gmail.com'  # Replace with your email
 app.config['MAIL_PASSWORD'] = 'your-app-password'     # Replace with your app password
 
 # Twilio WhatsApp configuration
-app.config['TWILIO_ACCOUNT_SID'] = 'AC44177f3c51acb9140ca9a5abb35a22b9'
+app.config['TWILIO_ACCOUNT_SID'] = ''
 app.config['TWILIO_AUTH_TOKEN'] = '61b4637797a78d20ad31d98119e1b3bf'
 app.config['TWILIO_PHONE_NUMBER'] = 'whatsapp:+14155238886'  # Twilio's default WhatsApp sandbox number
 app.config['TWILIO_WEBHOOK_URL'] = 'https://timberwolf-mastiff-9776.twil.io/demo-reply'  # Your Twilio Function URL
