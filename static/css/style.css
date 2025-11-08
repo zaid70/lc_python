@@ -33,6 +33,39 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
+  display: block;
+  visibility: visible !important;
+}
+
+.header-logo {
+  text-align: center;
+  padding: 1rem 0;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 200;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo a {
+  display: block;
+  line-height: 0;
+}
+
+.main-logo {
+  height: 80px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  max-width: 100%;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 .header-content {
@@ -41,13 +74,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-}
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 700;
+  padding: 0.5rem 2rem;
+  background: #fff;
   color: #a10649;
   text-decoration: none;
 }

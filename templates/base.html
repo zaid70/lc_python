@@ -6,9 +6,10 @@
   <title>{% block title %}Ladies Collections - Premium Jewelry Store in Bangalore | LC Shop{% endblock %}</title>
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/text8-5.png') }}">
-  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/text8-5.png') }}">
-  <link rel="apple-touch-icon" type="image/png" href="{{ url_for('static', filename='images/text8-5.png') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/halflogo.svg') }}">
+  <link rel="mask-icon" href="{{ url_for('static', filename='images/halflogo.svg') }}" color="#a10649">
+  <link rel="apple-touch-icon" type="image/svg+xml" href="{{ url_for('static', filename='images/halflogo.svg') }}">
+  <meta name="theme-color" content="#a10649">
   
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -28,8 +29,17 @@
 
   <!-- Header -->
   <header>
+    <div class="header-logo">
+      <a href="{{ url_for('index') }}" title="Ladies Collections Home">
+        <img src="{{ url_for('static', filename='images/logo_full.svg') }}" 
+             alt="Ladies Collections Logo" 
+             class="main-logo" 
+             width="auto"
+             height="80"
+             loading="eager">
+      </a>
+    </div>
     <div class="header-content">
-      <a href="{{ url_for('index') }}" class="logo">Ladies Collections</a>
       <nav>
         <ul class="nav-menu">
           <li><a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>Home</a></li>
