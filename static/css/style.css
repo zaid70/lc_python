@@ -40,25 +40,30 @@ header {
 
 .header-logo {
   text-align: center;
-  padding: 1rem 0;
+  padding: clamp(0.5rem, 2vw, 1.5rem) 0;
   background: #fff;
   border-bottom: 1px solid rgba(0,0,0,0.05);
   position: relative;
   z-index: 200;
-  height: 100px;
+  min-height: 60px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .header-logo a {
   display: block;
   line-height: 0;
+  width: min(90%, 800px);
+  margin: 0 auto;
 }
 
 .main-logo {
-  height: 80px;
-  width: auto;
+  width: 100%;
+  height: clamp(40px, 8vw, 80px);
   display: block;
   object-fit: contain;
   object-position: center;
@@ -66,6 +71,37 @@ header {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
+}
+
+/* Responsive adjustments for different devices */
+@media screen and (max-width: 768px) {
+  .header-logo {
+    padding: clamp(0.5rem, 1.5vw, 1rem) 0;
+  }
+  .header-logo a {
+    width: min(95%, 600px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-logo {
+    padding: 0.5rem 0;
+  }
+  .header-logo a {
+    width: 92%;
+  }
+  .main-logo {
+    height: clamp(35px, 7vw, 50px);
+  }
+}
+
+/* High-DPI screens */
+@media screen and (-webkit-min-device-pixel-ratio: 2), 
+       screen and (min-resolution: 192dpi) {
+  .main-logo {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 }
 
 .header-content {

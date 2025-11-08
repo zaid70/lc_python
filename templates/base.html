@@ -34,9 +34,12 @@
         <img src="{{ url_for('static', filename='images/logo_full.svg') }}" 
              alt="Ladies Collections Logo" 
              class="main-logo" 
-             width="auto"
+             width="800"
              height="80"
-             loading="eager">
+             loading="eager"
+             sizes="(max-width: 480px) 92vw,
+                    (max-width: 768px) 95vw,
+                    min(90vw, 800px)">
       </a>
     </div>
     <div class="header-content">
